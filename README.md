@@ -1,8 +1,18 @@
 # anti-afk
 
+[![latest release](https://img.shields.io/github/v/release/VoidSchema/ant-afk?label=release)](https://github.com/VoidSchema/ant-afk/releases/latest)
+
 A small Rust tool for Windows that keeps your Roblox session from being kicked for going idle. It taps a key every so often, with enough randomness that the pattern stops looking like a metronome.
 
-No overlay, no mod menu, no injection. One binary, a console log, and two hotkeys.
+Roblox drops idle clients after about 20 minutes. This keeps a keypress in the air well before the timer runs out.
+
+## Download
+
+Grab `anti-afk.exe` from the [latest release](https://github.com/VoidSchema/ant-afk/releases/latest/download/anti-afk.exe). It is one file of about 180 KB for 64-bit Windows 10 and 11, with no installer and no dependencies.
+
+Double-click it, leave the console window open, and go do the thing you were going to do. The console logs every tap with a timestamp, so you can see it is still awake. `F8` pauses, `F9` closes.
+
+The exe is not code-signed, so SmartScreen may introduce itself with a blue "Windows protected your PC" box. Click "More info", then "Run anyway". That is the entire installation.
 
 ## How it behaves
 
@@ -17,14 +27,6 @@ By default, input is only sent while the Roblox window has focus, so nothing lea
 ## What it will not do
 
 It will not play the game for you. There is no movement loop, no clicking, and no attempt to hide anything from Roblox. It taps one key every minute or two: enough to reset the idle timer, and not much else.
-
-## Build
-
-```powershell
-cargo build --release
-```
-
-You need a Rust toolchain on Windows. When the build finishes with `Finished`, you have `target\release\anti-afk.exe`, about 180 KB. No runtime, no DLLs, nothing to install.
 
 ## Usage
 
@@ -66,6 +68,16 @@ Key names: `space`, `enter`, `tab`, `shift`, `ctrl`, `alt`, `esc`, `backspace`, 
 
 Both are global hotkeys, so they work with Roblox in front and you never have to alt-tab to stop the tool.
 
+## Build from source
+
+If you would rather compile it yourself:
+
+```powershell
+cargo build --release
+```
+
+You need a Rust toolchain on Windows. When the build finishes with `Finished`, you have `target\release\anti-afk.exe`, the same binary that ships in the release. No runtime, no DLLs, nothing else to install.
+
 ## Before you leave it running
 
 Run the tool at the same privilege level as Roblox. If the game is running as administrator, a normal process cannot send it input, because Windows blocks input across integrity levels (UIPI).
@@ -75,6 +87,8 @@ Space makes your character jump. If that gets in the way, pick a key the game ig
 If a chat box is open when a tap lands, the game receives a space in your message. Press `F8` before you start typing. The tool waits patiently while it is paused.
 
 If `--probe` reports `roblox: no` while the game is clearly in front, the window title is probably not what the tool expects (some Microsoft Store builds behave this way). Use `--any-window`, or send the probe output along with a bug report.
+
+There is nothing to uninstall. Close the console window, delete the exe, and the tool leaves no config files or registry keys behind.
 
 Randomized timing makes the tool less robotic. It does not make the input invisible: Windows still marks injected events as injected, and Roblox can still treat automation as a violation of its terms. This is a keep-alive for your own session, not a bypass for anything.
 
