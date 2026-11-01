@@ -1,6 +1,10 @@
 # anti-afk
 
+<<<<<<< HEAD
 [![latest release](https://img.shields.io/github/v/release/VoidSchema/ant-afk?label=release)](https://github.com/VoidSchema/ant-afk/releases/latest)
+=======
+[![latest release](https://img.shields.io/github/v/release/VoidSchema/ant-afk?label=release)](https://github.com/VoidSchema/anti-afk/releases/latest)
+>>>>>>> 112b6593ef82e16a7c020f6e02f7ec49c21b901b
 
 A small Rust tool for Windows that keeps your Roblox session from being kicked for going idle. It taps a key every so often, with enough randomness that the pattern stops looking like a metronome.
 
